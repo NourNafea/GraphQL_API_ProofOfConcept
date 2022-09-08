@@ -6,4 +6,5 @@ public interface IOwnerService
 {
     IEnumerable<Owner> GetAll();
     Owner GetById(Guid id);
+    Owner CreateOwner(Owner owner);
 }
