@@ -28,7 +28,7 @@ builder.Services.AddGraphQL(options =>
         
     })
     .AddSystemTextJson()
-    .AddGraphTypes(typeof(AppSchema), ServiceLifetime.Scoped);
+    .AddGraphTypes(typeof(AppSchema), ServiceLifetime.Scoped).AddDataLoader();;
 
 var app = builder.Build();
 
