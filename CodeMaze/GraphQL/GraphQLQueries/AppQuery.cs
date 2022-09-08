@@ -1,5 +1,6 @@
 using CodeMaze.GraphQL.GraphQLTypes;
 using CodeMaze.Services;
+using GraphQL;
 using GraphQL.Types;
 
 namespace CodeMaze.GraphQL.GraphQLQueries;
@@ -14,5 +15,20 @@ public class AppQuery : ObjectGraphType
             resolve: context => ownerService.GetAll()
         );
         
+        //GET OWNER BY ID
+        Field<OwnerType>(
+            "owner",
+            arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "ownerId" }),
+            resolve: context =>
+            {
+                Guid id;
+                if (!Guid.TryParse(context.GetArgument<string>("ownerId"), out id))
+                {
+                    context.Errors.Add(new ExecutionError("Wrong value for guid"));
+                    return null;
+                }
+                return ownerService.GetById(id);
+            }
+        );
     }
 }
