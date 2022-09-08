@@ -13,6 +13,7 @@ public class AccountService : IAccountService
         _context = context;
     }
 
-    public IEnumerable<Account> GetAll() => _context.Accounts.ToList();
-    
+    public IEnumerable<Account> GetAllAccountsPerOwner(Guid ownerId) =>
+        _context.Accounts.Where(a => a.OwnerId.Equals(ownerId)).ToList();
+
 }

@@ -7,16 +7,12 @@ namespace CodeMaze.GraphQL.GraphQLQueries;
 //Moreover, we inject our repository object inside a constructor and create a field to return the result for the specific query.
 public class AppQuery : ObjectGraphType
 {
-    public AppQuery(IOwnerService ownerService, IAccountService accountService)
+    public AppQuery(IOwnerService ownerService)
     {
         Field<ListGraphType<OwnerType>>(
             "owners",
             resolve: context => ownerService.GetAll()
         );
         
-        Field<ListGraphType<AccountType>>(
-            "accounts",
-            resolve: context => accountService.GetAll()
-        );
     }
 }

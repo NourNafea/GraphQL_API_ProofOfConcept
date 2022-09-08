@@ -4,5 +4,5 @@ namespace CodeMaze.Services;
 
 public interface IAccountService
 {
-    IEnumerable<Account> GetAll();
+    IEnumerable<Account> GetAllAccountsPerOwner(Guid ownerId);
 }
