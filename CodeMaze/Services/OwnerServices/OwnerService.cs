@@ -24,4 +24,12 @@ public class OwnerService : IOwnerService
         _context.SaveChanges();
         return owner;
     }
+
+    public Owner UpdateOwner(Owner dbOwner, Owner owner)
+    {
+        dbOwner.Name = owner.Name;
+        dbOwner.Address = owner.Address;
+        _context.SaveChanges();
+        return dbOwner;
+    }
 }
