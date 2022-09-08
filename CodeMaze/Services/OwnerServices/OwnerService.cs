@@ -32,4 +32,10 @@ public class OwnerService : IOwnerService
         _context.SaveChanges();
         return dbOwner;
     }
+    
+    public void DeleteOwner(Owner owner)
+    { 
+        _context.Remove(owner);
+        _context.SaveChanges();
+    }
 }

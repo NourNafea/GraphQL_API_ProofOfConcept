@@ -40,5 +40,22 @@ public class AppMutation : ObjectGraphType
             }
         );
         
+        Field<StringGraphType>(
+            "deleteOwner",
+            arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IdGraphType>> { Name = "ownerId" }),
+            resolve: context =>
+            {
+                var ownerId = context.GetArgument<Guid>("ownerId");
+                var owner = ownerService.GetById(ownerId);
+                if (owner == null)
+                {
+                    context.Errors.Add(new ExecutionError("Couldn't find owner in db."));
+                    return null;
+                }
+                ownerService.DeleteOwner(owner);
+                return $"The owner with the id: {ownerId} has been successfully deleted from db.";
+            }
+        );
+        
     }
 }
